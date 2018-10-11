@@ -68,10 +68,10 @@ html_doc = """
         </div>
 """
 soup = BeautifulSoup(html_doc,'html.parser',from_encoding='utf-8')
-print '连接数'
+print ('连接数')
 links = soup.find_all('a')
 for link in links:
-    print link.name,':',link['href'],':',link.get_text()
-print '特定的url'
+    print (link.name,':',link['href'],':',link.get_text())
+print ('特定的url')
 link_node = soup.find('a',href='/video/10680')
-print link_node
+print (link_node)

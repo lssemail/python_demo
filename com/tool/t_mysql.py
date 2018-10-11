@@ -6,21 +6,21 @@ import xlwt
 
 sql_show_table = "show tables"
 sql_desc_table = "desc "
+db_ip = "localhost"
+db_username = "root"
+db_password = "123456"
 db_name = "sboot"
-db = pymysql.connect("localhost", "root", "123456", db_name, charset='utf8')
+db = pymysql.connect(db_ip, db_username, db_password, db_name, charset='utf8')
 col_width_default = 256 * 20
 cursor = db.cursor()
 
 workbook = xlwt.Workbook(encoding="utf-8")
 result = cursor.execute(sql_show_table)
 
-print(result)
 print("共有:%s\t张表" % (str(result)))
 for item in cursor.fetchall():
     current_index = 0
     table_name = item[0]
-    print()
-    print("表名: %s" % table_name)
     book_sheet = workbook.add_sheet(table_name, cell_overwrite_ok=True)
     book_sheet.col(0).width = col_width_default
     book_sheet.col(1).width = col_width_default
@@ -43,7 +43,7 @@ for item in cursor.fetchall():
         current_col = 0
 
 file_path = "".join(["C:\\Users\\Administrator\\Desktop\\", db_name, ".xls"])
-print(file_path)
+
 workbook.save(file_path)
 
 
